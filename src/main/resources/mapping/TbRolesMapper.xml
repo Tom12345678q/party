@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbRolesMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbRoles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="TINYINT" />
+    <result column="available" property="available" jdbcType="TINYINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_roles
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbRoles" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_roles (id, pid, department_id, 
+      name, description, priority, 
+      available)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{priority,jdbcType=TINYINT}, 
+      #{available,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbRoles" >
+    update party..tb_roles
+    set pid = #{pid,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=TINYINT},
+      available = #{available,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, pid, department_id, name, description, priority, available
+    from party..tb_roles
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, pid, department_id, name, description, priority, available
+    from party..tb_roles
+  </select>
+</mapper>

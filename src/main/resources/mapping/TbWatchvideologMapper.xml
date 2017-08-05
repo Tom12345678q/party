@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbWatchvideologMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbWatchvideolog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="video_name" property="videoName" jdbcType="VARCHAR" />
+    <result column="watch_second" property="watchSecond" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_watchvideolog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbWatchvideolog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_watchvideolog (id, user_id, username, 
+      video_id, video_name, watch_second
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{watchSecond,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbWatchvideolog" >
+    update party..tb_watchvideolog
+    set user_id = #{userId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      video_id = #{videoId,jdbcType=INTEGER},
+      video_name = #{videoName,jdbcType=VARCHAR},
+      watch_second = #{watchSecond,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, user_id, username, video_id, video_name, watch_second
+    from party..tb_watchvideolog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, user_id, username, video_id, video_name, watch_second
+    from party..tb_watchvideolog
+  </select>
+</mapper>

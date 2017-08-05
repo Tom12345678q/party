@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbQuestionMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbQuestion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="a_stems" property="aStems" jdbcType="VARCHAR" />
+    <result column="b_stems" property="bStems" jdbcType="VARCHAR" />
+    <result column="c_stems" property="cStems" jdbcType="VARCHAR" />
+    <result column="d_stems" property="dStems" jdbcType="VARCHAR" />
+    <result column="analyse" property="analyse" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbQuestion" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_question (id, a_stems, b_stems, 
+      c_stems, d_stems, analyse, 
+      answer, score, title, 
+      type_id, type_name)
+    values (#{id,jdbcType=INTEGER}, #{aStems,jdbcType=VARCHAR}, #{bStems,jdbcType=VARCHAR}, 
+      #{cStems,jdbcType=VARCHAR}, #{dStems,jdbcType=VARCHAR}, #{analyse,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbQuestion" >
+    update party..tb_question
+    set a_stems = #{aStems,jdbcType=VARCHAR},
+      b_stems = #{bStems,jdbcType=VARCHAR},
+      c_stems = #{cStems,jdbcType=VARCHAR},
+      d_stems = #{dStems,jdbcType=VARCHAR},
+      analyse = #{analyse,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      type_name = #{typeName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, a_stems, b_stems, c_stems, d_stems, analyse, answer, score, title, type_id, 
+    type_name
+    from party..tb_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, a_stems, b_stems, c_stems, d_stems, analyse, answer, score, title, type_id, 
+    type_name
+    from party..tb_question
+  </select>
+</mapper>

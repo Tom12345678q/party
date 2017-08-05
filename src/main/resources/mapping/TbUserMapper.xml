@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="INTEGER" />
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="joinPartyDate" property="joinpartydate" jdbcType="INTEGER" />
+    <result column="joinSchoolDate" property="joinschooldate" jdbcType="INTEGER" />
+    <result column="joinWorkDate" property="joinworkdate" jdbcType="INTEGER" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
+    <result column="job_level" property="jobLevel" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="studySecond" property="studysecond" jdbcType="BIGINT" />
+    <result column="studyTime" property="studytime" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbUser" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_user (id, name, password, 
+      salt, phone, email, 
+      age, birthday, className, 
+      grade, joinPartyDate, joinSchoolDate, 
+      joinWorkDate, nation, nativePlace, 
+      job_level, sex, studySecond, 
+      studyTime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{birthday,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{joinpartydate,jdbcType=INTEGER}, #{joinschooldate,jdbcType=INTEGER}, 
+      #{joinworkdate,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
+      #{jobLevel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{studysecond,jdbcType=BIGINT}, 
+      #{studytime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbUser" >
+    update party..tb_user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=INTEGER},
+      className = #{classname,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      joinPartyDate = #{joinpartydate,jdbcType=INTEGER},
+      joinSchoolDate = #{joinschooldate,jdbcType=INTEGER},
+      joinWorkDate = #{joinworkdate,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      job_level = #{jobLevel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      studySecond = #{studysecond,jdbcType=BIGINT},
+      studyTime = #{studytime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, name, password, salt, phone, email, age, birthday, className, grade, joinPartyDate, 
+    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime
+    from party..tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, password, salt, phone, email, age, birthday, className, grade, joinPartyDate, 
+    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime
+    from party..tb_user
+  </select>
+</mapper>

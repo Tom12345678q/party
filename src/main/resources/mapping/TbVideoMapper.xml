@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbVideoMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbVideo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id_list" property="roleIdList" jdbcType="VARCHAR" />
+    <result column="department_id_list" property="departmentIdList" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="watch_num" property="watchNum" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbVideo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_video (id, role_id_list, department_id_list, 
+      create_time, name, path, 
+      type_id, type_name, summary, 
+      watch_num)
+    values (#{id,jdbcType=INTEGER}, #{roleIdList,jdbcType=VARCHAR}, #{departmentIdList,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{watchNum,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbVideo" >
+    update party..tb_video
+    set role_id_list = #{roleIdList,jdbcType=VARCHAR},
+      department_id_list = #{departmentIdList,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      type_name = #{typeName,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      watch_num = #{watchNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, role_id_list, department_id_list, create_time, name, path, type_id, type_name, 
+    summary, watch_num
+    from party..tb_video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, role_id_list, department_id_list, create_time, name, path, type_id, type_name, 
+    summary, watch_num
+    from party..tb_video
+  </select>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hist.party.dao.TbArticleMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbArticle" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="role_id_list" property="roleIdList" jdbcType="VARCHAR" />
+    <result column="department_id_list" property="departmentIdList" jdbcType="VARCHAR" />
+    <result column="read_num" property="readNum" jdbcType="INTEGER" />
+    <result column="first_img" property="firstImg" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from party..tb_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbArticle" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into party..tb_article (id, create_time, title, 
+      type_id, type_name, role_id_list, 
+      department_id_list, read_num, first_img, 
+      user_id, username, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{roleIdList,jdbcType=VARCHAR}, 
+      #{departmentIdList,jdbcType=VARCHAR}, #{readNum,jdbcType=INTEGER}, #{firstImg,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbArticle" >
+    update party..tb_article
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      type_name = #{typeName,jdbcType=VARCHAR},
+      role_id_list = #{roleIdList,jdbcType=VARCHAR},
+      department_id_list = #{departmentIdList,jdbcType=VARCHAR},
+      read_num = #{readNum,jdbcType=INTEGER},
+      first_img = #{firstImg,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, create_time, title, type_id, type_name, role_id_list, department_id_list, 
+    read_num, first_img, user_id, username, content
+    from party..tb_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, create_time, title, type_id, type_name, role_id_list, department_id_list, 
+    read_num, first_img, user_id, username, content
+    from party..tb_article
+  </select>
+</mapper>
