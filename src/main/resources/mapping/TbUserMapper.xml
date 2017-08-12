@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.hist.party.dao.TbUserMapper" >
-  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbUser" >
+
+
+  <resultMap id="user" type="User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -21,32 +23,35 @@
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="studySecond" property="studysecond" jdbcType="BIGINT" />
     <result column="studyTime" property="studytime" jdbcType="VARCHAR" />
+    <result column="locked" property="locked" jdbcType="TINYINT" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from party..tb_user
+  
+
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from tb_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbUser" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+  <insert id="insert" parameterType="User" >
+    <selectKey resultType="int" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into party..tb_user (id, name, password, 
+    insert into tb_user (id, name, password, 
       salt, phone, email, 
       age, birthday, className, 
       grade, joinPartyDate, joinSchoolDate, 
       joinWorkDate, nation, nativePlace, 
       job_level, sex, studySecond, 
-      studyTime)
+      studyTime, locked)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{birthday,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
       #{grade,jdbcType=VARCHAR}, #{joinpartydate,jdbcType=INTEGER}, #{joinschooldate,jdbcType=INTEGER}, 
       #{joinworkdate,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
       #{jobLevel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{studysecond,jdbcType=BIGINT}, 
-      #{studytime,jdbcType=VARCHAR})
+      #{studytime,jdbcType=VARCHAR}, #{locked, jdbcType=TINYINT})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbUser" >
-    update party..tb_user
+  <update id="updateByPrimaryKey" parameterType="User" >
+    update tb_user
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
@@ -64,18 +69,27 @@
       job_level = #{jobLevel,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       studySecond = #{studysecond,jdbcType=BIGINT},
-      studyTime = #{studytime,jdbcType=VARCHAR}
+      studyTime = #{studytime,jdbcType=VARCHAR},
+      locked = #{locked, jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  
+  <!-- 根据用户的手机号或者邮箱号获取用户的信息 -->
+  <select id="getUserByAccount"  resultMap="user" parameterType="String" >
+  	select *
+  	from tb_user u
+  	where u.phone = #{account,jdbcType=VARCHAR} or u.email = #{account,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="user" parameterType="int" >
     select id, name, password, salt, phone, email, age, birthday, className, grade, joinPartyDate, 
-    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime
-    from party..tb_user
+    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime, locked
+    from tb_user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" resultMap="user" >
     select id, name, password, salt, phone, email, age, birthday, className, grade, joinPartyDate, 
-    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime
-    from party..tb_user
+    joinSchoolDate, joinWorkDate, nation, nativePlace, job_level, sex, studySecond, studyTime, locked
+    from tb_user
   </select>
 </mapper>

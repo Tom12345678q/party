@@ -1,7 +1,10 @@
 package cn.edu.hist.party.service;
 
-import cn.edu.hist.party.entity.TbUserRole;
 import java.util.List;
+import java.util.Set;
+
+import cn.edu.hist.party.entity.TbRoles;
+import cn.edu.hist.party.entity.TbUserRole;
 
 public interface TbUserRoleService {
     int deleteByPrimaryKey(Integer id);
@@ -13,4 +16,15 @@ public interface TbUserRoleService {
     List<TbUserRole> selectAll();
 
     int updateByPrimaryKey(TbUserRole record);
+    
+    
+    /**
+     * 根据用户的id获取他所拥有的角色的集合
+     * @param userId 用户的id
+     * @return
+     */
+    Set<TbRoles> findRoles(Integer userId);
+    
+    
+
 }

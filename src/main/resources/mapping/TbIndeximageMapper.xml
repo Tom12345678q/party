@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.edu.hist.party.dao.TbIndeximageMapper" >
-  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbIndeximage" >
+<mapper namespace="cn.edu.hist.party.dao.TbIndexImageMapper" >
+  <resultMap id="BaseResultMap" type="IndexImage" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from party..tb_indeximage
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from tb_index_image
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbIndeximage" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+  <insert id="insert" parameterType="IndexImage" >
+    <selectKey resultType="int" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into party..tb_indeximage (id, upload_time, img_url, 
+    insert into tb_index_image (id, upload_time, img_url, 
       url)
     values (#{id,jdbcType=INTEGER}, #{uploadTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}, 
       #{url,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbIndeximage" >
-    update party..tb_indeximage
+  <update id="updateByPrimaryKey" parameterType="IndexImage" >
+    update tb_index_image
     set upload_time = #{uploadTime,jdbcType=TIMESTAMP},
       img_url = #{imgUrl,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
     select id, upload_time, img_url, url
-    from party..tb_indeximage
+    from tb_index_image
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, upload_time, img_url, url
-    from party..tb_indeximage
+    from tb_index_image
   </select>
 </mapper>

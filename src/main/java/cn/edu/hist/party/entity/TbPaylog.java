@@ -2,7 +2,7 @@ package cn.edu.hist.party.entity;
 
 import java.util.Date;
 
-public class TbPaylog {
+public class TbPayLog {
     private Integer id;
 
     private Date createTime;

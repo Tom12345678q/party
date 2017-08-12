@@ -1,37 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.hist.party.dao.TbUserRoleMapper" >
-  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbUserRole" >
+
+
+
+  
+  <resultMap id="BaseResultMap" type="UserRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from party..tb_user_role
+  <resultMap id="role" type="Roles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="TINYINT" />
+    <result column="available" property="available" jdbcType="TINYINT" />
+  </resultMap>
+  
+<!--   <sql id="Base_Column_List" >  
+    
+  </sql>  
+  <include refid="Base_Column_List" />   -->
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from tb_user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbUserRole" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+  <insert id="insert" parameterType="UserRole" >
+    <selectKey resultType="int" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into party..tb_user_role (id, user_id, role_id
+    insert into tb_user_role (id, user_id, role_id
       )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbUserRole" >
-    update party..tb_user_role
+  <update id="updateByPrimaryKey" parameterType="UserRole" >
+    update tb_user_role
     set user_id = #{userId,jdbcType=INTEGER},
       role_id = #{roleId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
     select id, user_id, role_id
-    from party..tb_user_role
+    from tb_user_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, user_id, role_id
-    from party..tb_user_role
+    from tb_user_role
   </select>
+  
+    <!-- 检索出该用户拥有的所有角色 -->
+  <select id="findRoles" parameterType="int"  resultMap="role">
+    select r.id, r.pid, r.department_id, r.name, r.description, r.priority, 
+           r.available
+    from tb_roles r , tb_user_role ur   
+    where ur.user_id = #{id,jdbcType=INTEGER} and r.id = ur.role_id
+  </select>
+  
+
 </mapper>

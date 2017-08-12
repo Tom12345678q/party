@@ -5,6 +5,8 @@ import cn.edu.hist.party.service.TbRolesService;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service("rolesService")
 public class TbRolesServiceImpl implements TbRolesService {
 
 	public int deleteByPrimaryKey(Integer id) {

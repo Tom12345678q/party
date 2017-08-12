@@ -2,7 +2,7 @@ package cn.edu.hist.party.entity;
 
 import java.util.Date;
 
-public class TbIndeximage {
+public class TbIndexImage {
     private Integer id;
 
     private Date uploadTime;

@@ -5,6 +5,8 @@ import cn.edu.hist.party.service.TbInformService;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service("InformService")
 public class TbInformServiceImpl implements TbInformService {
 
 	public int deleteByPrimaryKey(Integer id) {

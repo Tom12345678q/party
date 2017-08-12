@@ -1,7 +1,8 @@
 package cn.edu.hist.party.entity;
 
 public class TbUser {
-    private Integer id;
+
+	private Integer id;
 
     private String name;
 
@@ -38,9 +39,13 @@ public class TbUser {
     private Long studysecond;
 
     private String studytime;
-
     
-    //学生党员的构造方法，加了一层皮
+    private Boolean locked;
+
+
+
+
+	//学生党员的构造方法，加了一层皮
     public TbUser studentParty(
     	Integer id,
         String name,
@@ -58,29 +63,30 @@ public class TbUser {
     	String nativeplace,
     	String sex,
     	Long studysecond,
-    	String studytime
+    	String studytime,
+    	Boolean locked
     		){
     	return new TbUser(id, name, password, salt, phone, email, age,
     			birthday, classname, grade, joinpartydate, joinschooldate,
-    			nation, nativeplace, sex, studysecond, studytime);
+    			nation, nativeplace, sex, studysecond, studytime, locked);
     }
     
     
     //同上，教职工党员的构造方法
     public TbUser teacherParty(Integer id, String name, String password, String salt, String phone, String email, Integer age,
 			Integer birthday, Integer joinpartydate, Integer joinworkdate, String nation, String nativeplace,
-			String jobLevel, String sex, Long studysecond, String studytime){
+			String jobLevel, String sex, Long studysecond, String studytime, Boolean locked){
     	
     	return new TbUser(id, name, password, salt, phone, email, age,
     			birthday, joinpartydate, joinworkdate, jobLevel,
-    			nation, nativeplace, sex, studysecond, studytime);
+    			nation, nativeplace, sex, studysecond, studytime, locked);
     	
     }
     
     
     public TbUser(Integer id, String name, String password, String salt, String phone, String email, Integer age,
 			Integer birthday, Integer joinpartydate, Integer joinworkdate, String nation, String nativeplace,
-			String jobLevel, String sex, Long studysecond, String studytime) {
+			String jobLevel, String sex, Long studysecond, String studytime, Boolean locked) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,12 +104,13 @@ public class TbUser {
 		this.sex = sex;
 		this.studysecond = studysecond;
 		this.studytime = studytime;
+		this.locked = locked;
 	}
 
 
 	public TbUser(Integer id, String name, String password, String salt, String phone, String email, Integer age,
 			Integer birthday, String classname, String grade, Integer joinpartydate, Integer joinschooldate,
-			String nation, String nativeplace, String sex, Long studysecond, String studytime) {
+			String nation, String nativeplace, String sex, Long studysecond, String studytime, Boolean locked) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -122,6 +129,7 @@ public class TbUser {
 		this.sex = sex;
 		this.studysecond = studysecond;
 		this.studytime = studytime;
+		this.locked = locked;
 	}
 
 
@@ -131,6 +139,14 @@ public class TbUser {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    /**
+     * 用来加密密码的盐
+     * @return salt =（mail + phone + salt）
+     */
+    public String getCredentialsSalt() {
+        return email + phone + salt;
     }
 
     public String getName() {
@@ -260,6 +276,15 @@ public class TbUser {
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
     }
+    
+    public Boolean getLocked() {
+		return locked;
+	}
+
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
 
     public TbUser() {
 		super();
@@ -272,7 +297,7 @@ public class TbUser {
 				+ ", grade=" + grade + ", joinpartydate=" + joinpartydate + ", joinschooldate=" + joinschooldate
 				+ ", joinworkdate=" + joinworkdate + ", nation=" + nation + ", nativeplace=" + nativeplace
 				+ ", jobLevel=" + jobLevel + ", sex=" + sex + ", studysecond=" + studysecond + ", studytime="
-				+ studytime + "]";
+				+ studytime +"  locked="+locked+ "]";
 	}
 
 	public Long getStudysecond() {

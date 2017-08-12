@@ -1,33 +1,35 @@
 package cn.edu.hist.party.service.impl;
 
-import cn.edu.hist.party.entity.TbWatchvideolog;
-import cn.edu.hist.party.service.TbWatchvideologService;
+import cn.edu.hist.party.entity.TbWatchVideoLog;
+import cn.edu.hist.party.service.TbWatchVideoLogService;
 
 import java.util.List;
 
-public class TbWatchvideologServiceImpl implements TbWatchvideologService {
+import org.springframework.stereotype.Service;
+@Service("watchVideoLogService")
+public class TbWatchVideoLogServiceImpl implements TbWatchVideoLogService {
 
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int insert(TbWatchvideolog record) {
+	public int insert(TbWatchVideoLog record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public TbWatchvideolog selectByPrimaryKey(Integer id) {
+	public TbWatchVideoLog selectByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<TbWatchvideolog> selectAll() {
+	public List<TbWatchVideoLog> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int updateByPrimaryKey(TbWatchvideolog record) {
+	public int updateByPrimaryKey(TbWatchVideoLog record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

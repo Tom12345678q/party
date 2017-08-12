@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.edu.hist.party.dao.TbPaylogMapper" >
-  <resultMap id="BaseResultMap" type="cn.edu.hist.party.entity.TbPaylog" >
+<mapper namespace="cn.edu.hist.party.dao.TbPayLogMapper" >
+  <resultMap id="BaseResultMap" type="PayLog" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="department_id" property="departmentId" jdbcType="INTEGER" />
@@ -12,22 +12,22 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from party..tb_paylog
+    delete from tb_pay_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.edu.hist.party.entity.TbPaylog" >
+  <insert id="insert" parameterType="PayLog" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into party..tb_paylog (id, create_time, department_id, 
+    insert into tb_pay_log (id, create_time, department_id, 
       department_name, last_num, pay_num, 
       user_id, user_name)
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{departmentId,jdbcType=INTEGER}, 
       #{departmentName,jdbcType=VARCHAR}, #{lastNum,jdbcType=DOUBLE}, #{payNum,jdbcType=DOUBLE}, 
       #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.hist.party.entity.TbPaylog" >
-    update party..tb_paylog
+  <update id="updateByPrimaryKey" parameterType="PayLog" >
+    update tb_pay_log
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       department_id = #{departmentId,jdbcType=INTEGER},
       department_name = #{departmentName,jdbcType=VARCHAR},
@@ -37,15 +37,15 @@
       user_name = #{userName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
     select id, create_time, department_id, department_name, last_num, pay_num, user_id, 
     user_name
-    from party..tb_paylog
+    from tb_pay_log
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, create_time, department_id, department_name, last_num, pay_num, user_id, 
     user_name
-    from party..tb_paylog
+    from tb_pay_log
   </select>
 </mapper>

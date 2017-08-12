@@ -5,6 +5,9 @@ import cn.edu.hist.party.service.TbTypeService;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service("typeService")
 public class TbTypeServiceImpl implements TbTypeService {
 
 	public int deleteByPrimaryKey(Integer id) {

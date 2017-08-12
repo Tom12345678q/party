@@ -1,16 +1,16 @@
 package cn.edu.hist.party.dao;
 
-import cn.edu.hist.party.entity.TbPaylog;
+import cn.edu.hist.party.entity.TbPayLog;
 import java.util.List;
 
-public interface TbPaylogMapper {
+public interface TbPayLogMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TbPaylog record);
+    int insert(TbPayLog record);
 
-    TbPaylog selectByPrimaryKey(Integer id);
+    TbPayLog selectByPrimaryKey(Integer id);
 
-    List<TbPaylog> selectAll();
+    List<TbPayLog> selectAll();
 
-    int updateByPrimaryKey(TbPaylog record);
+    int updateByPrimaryKey(TbPayLog record);
 }

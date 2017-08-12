@@ -1,7 +1,13 @@
 package cn.edu.hist.party.entity;
 
 public class TbRoles {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "TbRoles [id=" + id + ", pid=" + pid + ", departmentId=" + departmentId + ", name=" + name
+				+ ", description=" + description + ", priority=" + priority + ", available=" + available + "]";
+	}
+
+	private Integer id;
 
     private Integer pid;
 
@@ -13,7 +19,7 @@ public class TbRoles {
 
     private Byte priority;
 
-    private Byte available;
+    private Boolean available;
 
     public Integer getId() {
         return id;
@@ -63,11 +69,11 @@ public class TbRoles {
         this.priority = priority;
     }
 
-    public Byte getAvailable() {
+    public Boolean getAvailable() {
         return available;
     }
 
-    public void setAvailable(Byte available) {
+    public void setAvailable(Boolean available) {
         this.available = available;
     }
 }

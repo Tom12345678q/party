@@ -1,33 +1,35 @@
 package cn.edu.hist.party.service.impl;
 
-import cn.edu.hist.party.entity.TbPaylog;
-import cn.edu.hist.party.service.TbPaylogService;
+import cn.edu.hist.party.entity.TbPayLog;
+import cn.edu.hist.party.service.TbPayLogService;
 
 import java.util.List;
 
-public class TbPaylogServiceImpl implements TbPaylogService {
+import org.springframework.stereotype.Service;
+@Service("payLogService")
+public class TbPayLogServiceImpl implements TbPayLogService {
 
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int insert(TbPaylog record) {
+	public int insert(TbPayLog record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public TbPaylog selectByPrimaryKey(Integer id) {
+	public TbPayLog selectByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<TbPaylog> selectAll() {
+	public List<TbPayLog> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int updateByPrimaryKey(TbPaylog record) {
+	public int updateByPrimaryKey(TbPayLog record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

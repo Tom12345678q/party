@@ -1,16 +1,20 @@
 package cn.edu.hist.party.dao;
 
-import cn.edu.hist.party.entity.TbUserRole;
 import java.util.List;
+import java.util.Set;
+
+import cn.edu.hist.party.entity.TbRoles;
+import cn.edu.hist.party.entity.TbUserRole;
 
 public interface TbUserRoleMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(TbUserRole record);
-
-    TbUserRole selectByPrimaryKey(Integer id);
-
-    List<TbUserRole> selectAll();
-
-    int updateByPrimaryKey(TbUserRole record);
+    
+    /**
+     * 通过用户的id获取该用户所有的角色
+     * @param userId 用户的id
+     * @return 返回角色对象的集合
+     */
+    Set<TbRoles> findRoles(Integer userId);
+    
+    
 }

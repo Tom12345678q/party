@@ -1,16 +1,16 @@
 package cn.edu.hist.party.service;
 
-import cn.edu.hist.party.entity.TbIndeximage;
+import cn.edu.hist.party.entity.TbIndexImage;
 import java.util.List;
 
-public interface TbIndeximageService {
+public interface TbIndexImageService {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TbIndeximage record);
+    int insert(TbIndexImage record);
 
-    TbIndeximage selectByPrimaryKey(Integer id);
+    TbIndexImage selectByPrimaryKey(Integer id);
 
-    List<TbIndeximage> selectAll();
+    List<TbIndexImage> selectAll();
 
-    int updateByPrimaryKey(TbIndeximage record);
+    int updateByPrimaryKey(TbIndexImage record);
 }

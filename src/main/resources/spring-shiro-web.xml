@@ -13,7 +13,7 @@
     </bean>
 
     <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="shiro.xvf.credentials.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="cn.edu.hist.party.util.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
@@ -21,8 +21,10 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="shiro.xvf.realm.UserRealm">
-        
+    <bean id="userRealm" class="cn.edu.hist.party.realm.UserRealm">
+        <property name="userService" ref="userService"></property>
+        <property name="userRoleService" ref="userRoleService"></property>
+        <property name="rolePermissionService" ref="rolePermissionService"></property>
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <property name="cachingEnabled" value="true"/>
         <property name="authenticationCachingEnabled" value="true"/>
@@ -78,16 +80,18 @@
     </bean>
 
     <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+    <bean id="formAuthenticationFilter" class="cn.edu.hist.party.filter.FormLoginFilter">
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
-        <property name="loginUrl" value="/user/login"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/toFront"/>
     </bean>
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/user/login"/>
+        <property name="successUrl" value="/toFront"/>
+        <property name="loginUrl" value="/login"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filters">
             <util:map>
@@ -96,15 +100,18 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /index.jsp = anon
-                /unauthorized.jsp = anon
+				/static/** = anon
+            	/toIndex = anon
                 /login = authc
-                /logout = logout
-                /** = user
+				/** = user
             </value>
         </property>
     </bean>
-
+<!--            /index.jsp = anon
+                /unauthorized.jsp = anon
+                /login = authc
+                /logout = logout
+                /** = user -->
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 </beans>

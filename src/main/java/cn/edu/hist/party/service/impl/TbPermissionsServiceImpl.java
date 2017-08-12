@@ -5,6 +5,8 @@ import cn.edu.hist.party.service.TbPermissionsService;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service("permissionsService")
 public class TbPermissionsServiceImpl implements TbPermissionsService {
 
 	public int deleteByPrimaryKey(Integer id) {

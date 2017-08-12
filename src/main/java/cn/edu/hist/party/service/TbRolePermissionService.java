@@ -2,6 +2,7 @@ package cn.edu.hist.party.service;
 
 import cn.edu.hist.party.entity.TbRolePermission;
 import java.util.List;
+import java.util.Set;
 
 public interface TbRolePermissionService {
     int deleteByPrimaryKey(Integer id);
@@ -13,4 +14,11 @@ public interface TbRolePermissionService {
     List<TbRolePermission> selectAll();
 
     int updateByPrimaryKey(TbRolePermission record);
+    
+    /**
+     * 根据角色的id获取权限(以Set集合的形式)
+     * @param roleId 可一次接受多个id
+     * @return
+     */
+    Set<String> findPermissions(Integer... roleId);
 }

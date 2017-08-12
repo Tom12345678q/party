@@ -34,4 +34,16 @@
     select id, role_id, permission_id
     from party..tb_role_permission
   </select>
+  
+  <select id="findPermissions"  parameterType="List" resultType="String">
+  	select p.url
+  	from tb_permissions p,tb_role_permission rp 
+  	<where>
+  		rp.role_id in 
+  		<foreach item="role_id" collection="array" open="(" separator="," close=")">
+  			#{role_id}
+  		</foreach>
+  		 and  p.id = rp.permission_id
+  	</where>
+  </select>
 </mapper>

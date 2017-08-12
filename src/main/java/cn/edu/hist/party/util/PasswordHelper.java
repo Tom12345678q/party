@@ -10,16 +10,20 @@ import org.springframework.stereotype.Component;
 import cn.edu.hist.party.entity.TbUser;
 
 
+/**
+ * 给用户密码加密的工具类
+ * @author 丁赵雷
+ *
+ */
 
-@Component(value="passwordHelper")
 public class PasswordHelper {
 
-    private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
+    private static RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 
-    private String algorithmName = "md5";
-    private final int hashIterations = 2;
+    private static String algorithmName = "md5";//加密用的算法
+    private final static int hashIterations = 2;//散列几次
 
-/*    public void encryptPassword(TbUser user) {
+    public static void encryptPassword(TbUser user) {
 
         user.setSalt(randomNumberGenerator.nextBytes().toHex());
 
@@ -30,5 +34,5 @@ public class PasswordHelper {
                 hashIterations).toHex();
 
         user.setPassword(newPassword);
-    }*/
+    }
 }

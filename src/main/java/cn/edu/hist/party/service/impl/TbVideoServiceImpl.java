@@ -5,6 +5,9 @@ import cn.edu.hist.party.service.TbVideoService;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service("videoService")
 public class TbVideoServiceImpl implements TbVideoService {
 
 	public int deleteByPrimaryKey(Integer id) {

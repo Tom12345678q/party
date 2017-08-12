@@ -1,6 +1,6 @@
 package cn.edu.hist.party.entity;
 
-public class TbWatchvideolog {
+public class TbWatchVideoLog {
     private Integer id;
 
     private Integer userId;
