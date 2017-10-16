@@ -1,10 +1,9 @@
 package cn.edu.hist.party.dao;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import cn.edu.hist.party.entity.TbRoles;
-import cn.edu.hist.party.entity.TbUserRole;
 
 public interface TbUserRoleMapper {
 
@@ -15,6 +14,20 @@ public interface TbUserRoleMapper {
      * @return 返回角色对象的集合
      */
     Set<TbRoles> findRoles(Integer userId);
+    
+    /**
+     * 用户与角色进行关联(角色可为多个)
+     * @param map 
+     * @return
+     */
+    public int correlationRoles(Map<String,Object> map);
+    
+    
+    /**
+     * 
+     * @param map
+     */
+    public void uncorrelationRoles(Map<String,Object> map);
     
     
 }

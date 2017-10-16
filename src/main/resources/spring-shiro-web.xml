@@ -84,13 +84,13 @@
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
         <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/toFront"/>
+        <property name="successUrl" value="/toBackstage"/>
     </bean>
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="successUrl" value="/toFront"/>
+        <property name="successUrl" value="/toBackstage"/>
         <property name="loginUrl" value="/login"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filters">

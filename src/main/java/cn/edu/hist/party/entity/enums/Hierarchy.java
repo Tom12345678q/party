@@ -11,10 +11,10 @@ public enum Hierarchy {
 	 * 
 	 */
 	
-	ORGANIZATIONDEPARTMENT("组织部" , 1),
-	PARTYSECRETARY("党委书记" , 2),
-	BRANCHSECRETARY("党支部书记" , 3),
-	PARTYMEMBER("党员" , 4),
+	ORGANIZATION_DEPARTMENT("组织部" , 1),
+	PARTY_SECRETARY("党委书记" , 2),
+	BRANCH_SECRETARY("党支部书记" , 3),
+	PARTY_MEMBER("党员" , 4),
 	ACTIVIST("积极分子" , 5);
 	
 	

@@ -42,7 +42,7 @@ import cn.edu.hist.party.service.TbWatchVideoLogService;
 @ContextConfiguration(locations = {
 
 		"classpath:test-spring-mybatis.xml" , 
-		"classpath:spring-shiro-web.xml" ,"classpath:spring-mvc.xml"})
+		"classpath:spring-mvc.xml"})
 public class TestBase {
 	/**
 	 * 统一在这里注册服务接口

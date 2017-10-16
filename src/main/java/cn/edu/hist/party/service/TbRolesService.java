@@ -13,4 +13,6 @@ public interface TbRolesService {
     List<TbRoles> selectAll();
 
     int updateByPrimaryKey(TbRoles record);
+    
+
 }

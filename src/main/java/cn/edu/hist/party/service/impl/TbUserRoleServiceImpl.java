@@ -1,7 +1,9 @@
 package cn.edu.hist.party.service.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -52,6 +54,17 @@ public class TbUserRoleServiceImpl extends BaseDao<TbUserRole, Serializable> imp
 
 	public int updateByPrimaryKey(TbUserRole record) {
 		return this.updateEntity(record);
+	}
+
+
+	@Override
+	public int correlationRoles(Long userId, Long... roleIds) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("userId", userId);
+		map.put("roleIds", roleIds);
+		
+		return userRoleDao.correlationRoles(map);
 	}
 
 

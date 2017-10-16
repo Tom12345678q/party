@@ -38,10 +38,19 @@ public class StartListener implements ServletContextListener {
     	String rootPath = arg0.getServletContext().getContextPath()+"/";
     	arg0.getServletContext().setAttribute("rootPath",rootPath);
     	
-    	String jquery = String.format("<script type=\"text/javascript\" src=\"%s\"></script>",rootPath + "js/jquery-3.1.1.min.js" );
-    	arg0.getServletContext().setAttribute("jquery",jquery);
+    	String backPath = rootPath+"backstage/";
+    	arg0.getServletContext().setAttribute("backPath", backPath);
     	
-    	String bootstrapCss = String.format("<link rel=\"stylesheet\" href=\"%s\">", rootPath + "plugin/bootstrap/css/bootstrap.min.css");
+    	String frontPath = rootPath+"front/";
+    	arg0.getServletContext().setAttribute("frontPath", frontPath);
+    	
+    	String staticPath = rootPath+"static/";
+    	arg0.getServletContext().setAttribute("staticPath", staticPath);
+    	
+    	String jqueryPath = String.format("<script type=\"text/javascript\" src=\"%s\"></script>",rootPath + "static/js/jquery-3.1.1.min.js" );
+    	arg0.getServletContext().setAttribute("jqueryPath",jqueryPath);
+    	
+    	String bootstrapCss = String.format("<link rel=\"stylesheet\" href=\"%s\">", rootPath + "static/css/bootstrap.min.css");
     	arg0.getServletContext().setAttribute("bootstrapCss", bootstrapCss);
     	
     	SysConfig.ROOT_PATH = rootPath;
@@ -51,7 +60,7 @@ public class StartListener implements ServletContextListener {
     	
     	Logger logger = Logger.getLogger(this.getClass());
     	logger.info("rootPath:"+rootPath);
-    	logger.info("jquery:"+jquery);
+    	logger.info("jquery:"+jqueryPath);
     	logger.info("bootstrapCss:"+bootstrapCss);
     }
 	

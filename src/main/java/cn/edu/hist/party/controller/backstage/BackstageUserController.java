@@ -1,11 +1,10 @@
 package cn.edu.hist.party.controller.backstage;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.hist.party.base.BaseController;
 import cn.edu.hist.party.entity.TbUser;
@@ -18,10 +17,10 @@ import net.sf.json.JSONObject;
  *
  */
 @Controller
-@RequestMapping("/backstage/user/manage/")
+@RequestMapping("/backstage/user/")
 public class BackstageUserController extends BaseController{
 
-	private String basePath = "backstage/user";
+	private String basePath = "backstage/user/";
 	
 
 	
@@ -30,7 +29,7 @@ public class BackstageUserController extends BaseController{
 	 * @param user
 	 */
 	@RequestMapping(value="addDo" , method=RequestMethod.POST)
-	public void addDo(
+	public ModelAndView addDo(
 			@RequestParam(name="user" ,defaultValue="") String user1
 			){
 		
@@ -47,7 +46,33 @@ public class BackstageUserController extends BaseController{
 		}
 		log.info("受影响的行数 =  "+num);
 		log.info(message+user.toString());
-		getMV().addObject("notice", message);
-		getMV().setViewName(basePath+"addUser");
+		
+		ModelAndView mv = getMV();
+		mv.addObject("notice", message);
+		mv.setViewName(basePath+"addUser");
+		
+		return mv; 
+	}
+	
+	//查看个人信息
+	@RequestMapping(value="/info" , method=RequestMethod.GET)
+	public ModelAndView info(){
+		
+		String account = String.valueOf(getSubject().getPrincipal());
+		
+		TbUser user = userService.getUserByAccount(account);
+		
+		ModelAndView mv = getMV();
+		if(user != null){
+			mv.addObject("user", user);
+		}else{
+			mv.addObject("message", "无法获取您的信息");
+		}
+		
+		log.info("user="+user);
+		mv.setViewName(basePath+"userInfo");
+		
+		return mv;
+		
 	}
 }

@@ -3,6 +3,8 @@ package cn.edu.hist.party.base;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.hist.party.service.TbArticleService;
@@ -67,10 +69,16 @@ public abstract class BaseController {
 
 	protected Logger log;
 
-	public BaseController() {
+	protected BaseController() {
 		if(log == null){
 			log = Logger.getLogger(this.getClass());
 		}
 		log.info("log对象创建成功");
 	}
+	
+	protected Subject getSubject(){
+		return SecurityUtils.getSubject();
+	}
+	
+	
 }

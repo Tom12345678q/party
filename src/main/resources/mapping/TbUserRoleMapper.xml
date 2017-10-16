@@ -39,6 +39,17 @@
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
+  
+  <!-- 将用户与角色关联起来   增删改不用写resultType写了会报错-->
+  <insert id="correlationRoles"  parameterType="Map"  useGeneratedKeys="true" keyProperty="id">
+    
+	insert into tb_user_role ( user_id, role_id)  values 
+	<foreach collection="roleIds"  item="roleId"  separator=",">
+	   ( #{userId}, #{roleId})
+	</foreach>
+  
+  </insert>
+  
   <update id="updateByPrimaryKey" parameterType="UserRole" >
     update tb_user_role
     set user_id = #{userId,jdbcType=INTEGER},

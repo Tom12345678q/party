@@ -25,6 +25,14 @@ public interface TbUserRoleService {
      */
     Set<TbRoles> findRoles(Integer userId);
     
+    /**
+     * 将用户与角色关联起来
+     * @param userId 用户id
+     * @param roleIds 角色id(多个)
+     * @return 受影响的行数
+     */
+    int correlationRoles(Long userId, Long... roleIds);
+    
     
 
 }
